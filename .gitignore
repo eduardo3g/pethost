@@ -1,1 +1,12 @@
+# Package Directories
 node_modules
+jspm_packages
+
+# Serverless Directories
+.Serverless
+.env
+
+# Serverless Manifest Files
+serverless.manifest.json
+.serverless/manifest.json
+false/
