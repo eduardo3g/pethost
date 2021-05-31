@@ -1,0 +1,29 @@
+service: pethost
+frameworkVersion: '2'
+
+plugins:
+  - serverless-appsync-plugin
+  - serverless-iam-roles-per-function
+  - serverless-export-env
+  - serverless-layers
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-1
+  environment:
+    STAGE: ${self:custom.stage}
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
+
+package:
+  exclude:
+    - package-lock.json
+    - package.json
+
+custom:
+  region: ${opt:region, self:provider.region}
+  stage: ${opt:stage, self:provider.stage}
+
+Outputs:
+  AwsRegion:
+    Value: ${self:custom.region}
