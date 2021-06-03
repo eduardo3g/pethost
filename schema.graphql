@@ -1,0 +1,183 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  asPetOwner: PetOwnerQuery
+  @aws_auth(cognito_groups: ["PetOwner"])
+
+  asPetHost: PetHostQuery
+  @aws_auth(cognito_groups: ["PetHost"])
+}
+
+type Mutation {
+  asPetOwner: PetOwnerMutation
+  @aws_auth(cognito_groups: ["PetOwner"])
+
+  asPetHost: PetHostMutation
+  @aws_auth(cognito_groups: ["PetHost"])
+}
+
+type PetOwnerQuery {
+  getImageUploadUrl(extension: String, contentType: String): AWSURL!
+
+  getMyProfile: IProfile!
+}
+
+type PetHostQuery {
+  getImageUploadUrl(extension: String, contentType: String): AWSURL!
+
+  getMyProfile: IProfile!
+}
+
+type PetOwnerMutation {
+  createPet(petInput: PetInput!): Pet!
+
+  createBooking(bookingInput: BookingInput!): Booking!
+
+  cancelBookingRequest(bookingId: ID!): Boolean!
+}
+
+type PetHostMutation {
+  acceptBookingRequest(bookingId: ID!): Boolean!
+
+  rejectBookingRequest(bookingId: ID!): Boolean!
+
+  cancelBookingRequest(bookingId: ID!): Boolean!
+}
+
+input PetInput {
+  name: String!
+  age: Int!
+  bio: String
+  type: PetType!
+  ownerId: ID!
+}
+
+input BookingInput {
+  hostId: ID!
+  petId: ID!
+  fromDate: AWSDateTime!
+  toDate: AWSDateTime!
+}
+
+interface IProfile {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  imageUrl: AWSURL
+  birthDate: AWSDate!
+  bio: String
+  city: String!
+  state: String!
+  address: String!
+  addressNumber: Int!
+  zipcode: String!
+  cellphoneDDI: Int!
+  cellphone: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
+  deletedAt: AWSDateTime
+}
+
+type MyProfile implements IProfile {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  imageUrl: AWSURL
+  birthDate: AWSDate!
+  bio: String
+  city: String!
+  state: String!
+  address: String!
+  addressNumber: Int!
+  zipcode: String!
+  cellphoneDDI: Int!
+  cellphone: String!
+  pets: [Pet!]
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
+  deletedAt: AWSDateTime
+}
+
+type PetOwnerProfile implements IProfile {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  imageUrl: AWSURL
+  birthDate: AWSDate!
+  bio: String
+  city: String!
+  state: String!
+  address: String!
+  addressNumber: Int!
+  zipcode: String!
+  cellphoneDDI: Int!
+  cellphone: String!
+  pets: [Pet!]
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
+  deletedAt: AWSDateTime
+}
+
+type PetHostProfile implements IProfile {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  imageUrl: AWSURL
+  birthDate: AWSDate!
+  bio: String
+  city: String!
+  state: String!
+  address: String!
+  addressNumber: Int!
+  zipcode: String!
+  cellphoneDDI: Int!
+  cellphone: String!
+  residenceType: String!
+  maxPetsPerVisit: Int!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
+  deletedAt: AWSDateTime
+}
+
+type Pet {
+  id: ID!
+  name: String!
+  age: Int!
+  ownerId: PetOwnerProfile!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
+  deletedAt: AWSDateTime
+}
+
+type Booking {
+  id: ID!
+  owner: PetOwnerProfile!
+  host: PetHostProfile!
+  pet: Pet!
+  fromDate: AWSDateTime!
+  toDate: AWSDateTime!
+  status: BookingStatus!
+}
+
+enum ResidenceType {
+  House
+  Apartment
+}
+
+enum PetType {
+  Cat
+  Dog
+  Bird
+  Hamster
+}
+
+enum BookingStatus {
+  Pending
+  Rejected
+  Accepted
+  Canceled
+  Completed
+}
