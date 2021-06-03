@@ -5,7 +5,7 @@ const DocumentClient = new DynamoDB.DocumentClient();
 const { USERS_TABLE } = process.env;
 
 module.exports.handler = async event => {
-  const { name } = event.request.userAttributes;
+  const { name, email } = event.request.userAttributes;
 
   if (event.triggerSource === 'PostConfirmation_ConfirmSignUp') {
     const timestamp = new Date().toJSON();
@@ -13,6 +13,7 @@ module.exports.handler = async event => {
     const user = {
       id: event.userName,
       name,
+      email,
       createdAt: timestamp,
       updatedAt: timestamp,
       deletedAt: null,

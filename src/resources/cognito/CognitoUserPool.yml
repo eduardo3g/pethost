@@ -17,5 +17,9 @@ CognitoUserPool:
         Name: name
         Required: false
         Mutable: true
+      - AttributeDatType: String
+        Name: email
+        Required: false
+        Mutable: true
     LambdaConfig:
       PostConfirmation: !GetAtt ConfirmUserSignupLambdaFunction.Arn
