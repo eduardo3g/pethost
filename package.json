@@ -31,7 +31,7 @@
     "sls": "sls",
     "exportEnv": "sls export-env",
     "jest": "jest",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "create-cognito-user": "aws cognito-idp --region eu-west-1 sign-up --client-id [my-cognito-client-id] --username test@pethost.com --password 12345678 --user-attributes Name=name,Value=Test Name=email,Value=test@pethost.com"
   },
   "repository": {
     "type": "git",
