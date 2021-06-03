@@ -6,5 +6,5 @@ userPoolConfig:
   defaultAction: ALLOW
   userPoolId: !Ref CognitoUserPool
 additionalAuthenticationProviders:
-  - authenticationType: IAM
+  - authenticationType: AWS_IAM
 mappingTemplatesLocation: src/mapping-templates
