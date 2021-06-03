@@ -17,7 +17,7 @@ CognitoUserPool:
         Name: name
         Required: false
         Mutable: true
-      - AttributeDatType: String
+      - AttributeDataType: String
         Name: email
         Required: false
         Mutable: true
