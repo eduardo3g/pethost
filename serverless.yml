@@ -5,7 +5,6 @@ plugins:
   - serverless-appsync-plugin
   - serverless-iam-roles-per-function
   - serverless-export-env
-  - serverless-layers
 
 provider:
   name: aws
@@ -42,12 +41,14 @@ resources:
     UserPoolInvokeConfirmUserSignupLambdaPermission: ${file(src/resources/cognito/UserPoolInvokeConfirmUserSignupLambdaPermission.yml):UserPoolInvokeConfirmUserSignupLambdaPermission}
     WebUserPoolClient: ${file(src/resources/cognito/WebUserPoolClient.yml):WebUserPoolClient}
 
-Outputs:
-  AwsRegion:
-    Value: ${self:custom.region}
+    UsersTable: ${file(src/resources/dynamodb/UsersTable.yml):UsersTable}
 
-  CognitoUserPoolId:
-    Value: !Ref CognitoUserPool
+  Outputs:
+    AwsRegion:
+      Value: ${self:custom.region}
 
-  WebCognitoUserPoolClientId:
-    Value: !Ref WebUserPoolClient
+    CognitoUserPoolId:
+      Value: !Ref CognitoUserPool
+
+    WebCognitoUserPoolClientId:
+      Value: !Ref WebUserPoolClient
