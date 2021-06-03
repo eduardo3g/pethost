@@ -28,6 +28,9 @@
     "serverless-iam-roles-per-function": "^3.2.0"
   },
   "scripts": {
+    "sls": "sls",
+    "exportEnv": "sls export-env",
+    "jest": "jest",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
