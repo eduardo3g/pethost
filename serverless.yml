@@ -26,6 +26,18 @@ custom:
   appSync:
     - ${file(serverless.appsync-api.yml)}
 
+resources:
+  Resources:
+    CognitoUserPool: ${file(src/resources/cognito/CognitoUserPool.yml):CognitoUserPool}
+    UserPoolInvokeConfirmUserSignupLambdaPermission: ${file(src/resources/cognito/UserPoolInvokeConfirmUserSignupLambdaPermission.yml):UserPoolInvokeConfirmUserSignupLambdaPermission}
+    WebUserPoolClient: ${file(src/resources/cognito/WebUserPoolClient.yml):WebUserPoolClient}
+
 Outputs:
   AwsRegion:
     Value: ${self:custom.region}
+
+  CognitoUserPoolId:
+    Value: !Ref CognitoUserPool
+
+  WebCognitoUserPoolClientId:
+    Value: !Ref WebUserPoolClient
