@@ -7,4 +7,4 @@ userPoolConfig:
   userPoolId: !Ref CognitoUserPool
 additionalAuthenticationProviders:
   - authenticationType: IAM
-mappingTemplatesLocation: mapping-templates
+mappingTemplatesLocation: src/mapping-templates
