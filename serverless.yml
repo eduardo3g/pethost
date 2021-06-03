@@ -26,14 +26,7 @@ custom:
     - ${file(serverless.appsync-api.yml)}
 
 functions:
-  confirmUserSignup:
-    handler: src/functions/confirm-user-signup.handler
-    environment:
-      USERS_TABLE: !Ref UsersTable
-    iamRoleStatements:
-      - Effect: Allow
-        Action: dynamodb:PutItem
-        Resource: !GetAtt UsersTable.Arn
+  confirmUserSignup: ${file(src/resources/lambda/ConfirmUserSignupLambda.yml):ConfirmUserSignup}
 
 resources:
   Resources:

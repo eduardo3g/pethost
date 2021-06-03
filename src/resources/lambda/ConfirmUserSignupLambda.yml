@@ -1,0 +1,8 @@
+ConfirmUserSignup:
+  handler: src/functions/confirm-user-signup.handler
+  environment:
+    USERS_TABLE: !Ref UsersTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:PutItem
+      Resource: !GetAtt UsersTable.Arn
