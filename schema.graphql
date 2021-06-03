@@ -64,8 +64,7 @@ input BookingInput {
 
 interface IProfile {
   id: ID!
-  firstName: String!
-  lastName: String!
+  name: String!
   imageUrl: AWSURL
   birthDate: AWSDate!
   bio: String
@@ -83,8 +82,7 @@ interface IProfile {
 
 type MyProfile implements IProfile {
   id: ID!
-  firstName: String!
-  lastName: String!
+  name: String!
   imageUrl: AWSURL
   birthDate: AWSDate!
   bio: String
@@ -103,8 +101,7 @@ type MyProfile implements IProfile {
 
 type PetOwnerProfile implements IProfile {
   id: ID!
-  firstName: String!
-  lastName: String!
+  name: String!
   imageUrl: AWSURL
   birthDate: AWSDate!
   bio: String
@@ -123,8 +120,7 @@ type PetOwnerProfile implements IProfile {
 
 type PetHostProfile implements IProfile {
   id: ID!
-  firstName: String!
-  lastName: String!
+  name: String!
   imageUrl: AWSURL
   birthDate: AWSDate!
   bio: String
