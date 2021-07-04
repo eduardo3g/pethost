@@ -1,0 +1,5 @@
+UserPoolHostGroup:
+  Type: AWS::Cognito::UserPoolGroup
+  Properties:
+    UserPoolId: !Ref CognitoUserPool
+    GroupName: host

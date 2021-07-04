@@ -1,0 +1,5 @@
+UserPoolOwnerGroup:
+  Type: AWS::Cognito::UserPoolGroup
+  Properties:
+    UserPoolId: !Ref CognitoUserPool
+    GroupName: owner
