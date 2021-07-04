@@ -6,3 +6,7 @@ ConfirmUserSignup:
     - Effect: Allow
       Action: dynamodb:PutItem
       Resource: !GetAtt UsersTable.Arn
+    - Effect: Allow
+      Action: cognito-idp:AdminAddUserToGroup
+      Resource: "*"
+
