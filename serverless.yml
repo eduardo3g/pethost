@@ -33,6 +33,8 @@ resources:
     CognitoUserPool: ${file(src/resources/cognito/CognitoUserPool.yml):CognitoUserPool}
     UserPoolInvokeConfirmUserSignupLambdaPermission: ${file(src/resources/cognito/UserPoolInvokeConfirmUserSignupLambdaPermission.yml):UserPoolInvokeConfirmUserSignupLambdaPermission}
     WebUserPoolClient: ${file(src/resources/cognito/WebUserPoolClient.yml):WebUserPoolClient}
+    CognitoUserPoolOwnerGroup: ${file(src/resources/cognito/CognitoUserPoolOwnerGroup.yml):UserPoolOwnerGroup}
+    CognitoUserPoolHostGroup: ${file(src/resources/cognito/CognitoUserPoolHostGroup.yml):UserPoolHostGroup}
 
     UsersTable: ${file(src/resources/dynamodb/UsersTable.yml):UsersTable}
 

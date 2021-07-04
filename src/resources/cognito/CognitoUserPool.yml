@@ -1,6 +1,7 @@
 CognitoUserPool:
   Type: AWS::Cognito::UserPool
   Properties:
+    UserPoolName: ${self:custom.stage}-pethost-user-pool
     AutoVerifiedAttributes:
       - email
     Policies:
@@ -15,6 +16,10 @@ CognitoUserPool:
     Schema:
       - AttributeDataType: String
         Name: name
+        Required: false
+        Mutable: true
+      - AttributeDataType: String
+        Name: role
         Required: false
         Mutable: true
     LambdaConfig:
