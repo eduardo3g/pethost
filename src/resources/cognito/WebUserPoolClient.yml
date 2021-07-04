@@ -1,8 +1,8 @@
 WebUserPoolClient:
   Type: AWS::Cognito::UserPoolClient
   Properties:
+    ClientName: ${self:custom.stage}-pethost-user-pool-client
     UserPoolId:  !Ref CognitoUserPool
-    ClientName: web
     ExplicitAuthFlows:
       - ALLOW_USER_SRP_AUTH
       - ALLOW_USER_PASSWORD_AUTH
