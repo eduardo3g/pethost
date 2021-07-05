@@ -27,6 +27,7 @@ custom:
 
 functions:
   confirmUserSignup: ${file(src/resources/lambda/ConfirmUserSignupLambda.yml):ConfirmUserSignup}
+  createPet: ${file(src/resources/lambda/CreatePetLambda.yml):CreatePet}
 
 resources:
   Resources:
@@ -37,6 +38,7 @@ resources:
     CognitoUserPoolHostGroup: ${file(src/resources/cognito/CognitoUserPoolHostGroup.yml):UserPoolHostGroup}
 
     UsersTable: ${file(src/resources/dynamodb/UsersTable.yml):UsersTable}
+    PetsTable: ${file(src/resources/dynamodb/PetsTable.yml):PetsTable}
 
   Outputs:
     AwsRegion:

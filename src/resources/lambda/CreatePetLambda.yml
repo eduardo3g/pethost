@@ -1,0 +1,8 @@
+CreatePet:
+  handler: src/functions/create-pet.handler
+  environment:
+    PETS_TABLE: !Ref PetsTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:PutItem
+      Resource: !GetAtt PetsTable.Arn

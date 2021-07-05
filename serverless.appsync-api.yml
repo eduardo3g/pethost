@@ -8,3 +8,21 @@ userPoolConfig:
 additionalAuthenticationProviders:
   - authenticationType: AWS_IAM
 mappingTemplatesLocation: src/mapping-templates
+mappingTemplates:
+  - type: Mutation
+    field: createPet
+    dataSource: createPetFunction
+    request: false
+    response: false
+dataSources:
+  - type: AMAZON_DYNAMODB
+    name: petsTable
+    config:
+      tableName: !Ref PetsTable
+  - type: AWS_LAMBDA
+    name: createPetFunction
+    config:
+      functionName: createPet
+
+substitutions:
+  PetsTable: !Ref PetsTable
