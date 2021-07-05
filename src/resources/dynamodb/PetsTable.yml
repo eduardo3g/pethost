@@ -1,0 +1,26 @@
+PetsTable:
+  Type: AWS::DynamoDB::Table
+  Properties:
+    BillingMode: PAY_PER_REQUEST
+    KeySchema:
+      - AttributeName: id
+        KeyType: HASH
+    AttributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+      - AttributeName: ownerId
+        AttributeType: S
+    GlobalSecondaryIndexes:
+      - IndexName: byOwner
+        KeySchema:
+          - AttributeName: ownerId
+            KeyType: HASH
+          - AttributeName: id
+            KeyType: RANGE
+        Projection:
+          ProjectionType: ALL
+    Tags:
+      - Key: Environment
+        Value: ${self:custom.stage}
+      - Key: Name
+        Value: pets-table
