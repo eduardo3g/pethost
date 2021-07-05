@@ -8,5 +8,4 @@ ConfirmUserSignup:
       Resource: !GetAtt UsersTable.Arn
     - Effect: Allow
       Action: cognito-idp:AdminAddUserToGroup
-      Resource: "*"
-
+      Resource: '*'
