@@ -4,7 +4,10 @@ const AWS = require('aws-sdk');
 const chance = require('chance').Chance();
 const velocityUtil = require('amplify-appsync-simulator/lib/velocity/util');
 
-const a_random_user = () => {
+const a_random_user = async role => {
+  const cognito = new AWS.CognitoIdentityServiceProvider();
+  const clientId = process.env.WEB_COGNITO_USER_POOL_CLIENT_ID;
+
   const firstName = chance.first({ nationality: 'en' });
   const lastName = chance.first({ nationality: 'en' });
   const suffix = chance.string({
@@ -15,10 +18,25 @@ const a_random_user = () => {
   const password = chance.string({ length: 8 });
   const email = `${firstName}-${lastName}-${suffix}@pethost.com`;
 
+  const signUpResponse = await cognito
+    .signUp({
+      ClientId: clientId,
+      Username: email,
+      Password: password,
+      UserAttributes: [
+        { Name: 'name', Value: name },
+        { Name: 'email', Value: email },
+        { Name: 'custom:role', Value: role },
+      ],
+    })
+    .promise();
+
   return {
     name,
     password,
     email,
+    role,
+    cognitoUsername: signUpResponse.UserSub,
   };
 };
 
