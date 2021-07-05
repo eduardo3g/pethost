@@ -60,53 +60,46 @@ const an_appsync_context = (identity, args, result, source, info, prev) => {
   };
 };
 
-const an_authenticated_user = async () => {
-  const { name, email, password } = a_random_user();
+const an_authenticated_user = async userRole => {
+  try {
+    const { name, email, password, cognitoUsername } = await a_random_user(
+      userRole,
+    );
 
-  const cognito = new AWS.CognitoIdentityServiceProvider();
+    const cognito = new AWS.CognitoIdentityServiceProvider();
 
-  const userPoolId = process.env.COGNITO_USER_POOL_ID;
-  const clientId = process.env.WEB_COGNITO_USER_POOL_CLIENT_ID;
+    const userPoolId = process.env.COGNITO_USER_POOL_ID;
+    const clientId = process.env.WEB_COGNITO_USER_POOL_CLIENT_ID;
 
-  const signUpResponse = await cognito
-    .signUp({
-      ClientId: clientId,
-      Username: email,
-      Password: password,
-      UserAttributes: [
-        { Name: 'name', Value: name },
-        { Name: 'email', Value: email },
-      ],
-    })
-    .promise();
+    await cognito
+      .adminConfirmSignUp({
+        UserPoolId: userPoolId,
+        Username: cognitoUsername,
+      })
+      .promise();
 
-  const username = signUpResponse.UserSub;
+    const auth = await cognito
+      .initiateAuth({
+        AuthFlow: 'USER_PASSWORD_AUTH',
+        ClientId: clientId,
+        AuthParameters: {
+          USERNAME: cognitoUsername,
+          PASSWORD: password,
+        },
+      })
+      .promise();
 
-  await cognito
-    .adminConfirmSignUp({
-      UserPoolId: userPoolId,
-      Username: username,
-    })
-    .promise();
-
-  const auth = await cognito
-    .initiateAuth({
-      AuthFlow: 'USER_PASSWORD_AUTH',
-      ClientId: clientId,
-      AuthParameters: {
-        USERNAME: username,
-        PASSWORD: password,
-      },
-    })
-    .promise();
-
-  return {
-    username,
-    name,
-    email,
-    idToken: auth.AuthenticationResult.IdToken,
-    accessToken: auth.AuthenticationResult.AccessToken,
-  };
+    return {
+      username: cognitoUsername,
+      name,
+      email,
+      idToken: auth.AuthenticationResult.IdToken,
+      accessToken: auth.AuthenticationResult.AccessToken,
+    };
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
 };
 
 module.exports = {
