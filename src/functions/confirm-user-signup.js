@@ -7,7 +7,13 @@ const CognitoClient = new CognitoServiceProvider();
 const { USERS_TABLE } = process.env;
 
 module.exports.handler = async event => {
-  const { name, email, 'custom:role': role } = event.request.userAttributes;
+  const {
+    name,
+    email,
+    address,
+    phone_number,
+    'custom:role': role,
+  } = event.request.userAttributes;
 
   if (event.triggerSource === 'PostConfirmation_ConfirmSignUp') {
     const timestamp = new Date().toJSON();
@@ -16,6 +22,8 @@ module.exports.handler = async event => {
       id: event.userName,
       name,
       email,
+      address,
+      phone_number,
       role,
       createdAt: timestamp,
       updatedAt: timestamp,
