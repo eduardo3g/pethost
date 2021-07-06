@@ -45,8 +45,6 @@ interface IProfile {
   birthDate: AWSDate!
   bio: String
   address: String!
-  # addressNumber: Int!
-  # zipCode: String!
   cellphone: String!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime
@@ -60,8 +58,6 @@ type PetOwnerProfile implements IProfile {
   birthDate: AWSDate!
   bio: String
   address: String!
-  # addressNumber: Int!
-  # zipCode: String!
   cellphone: String!
   pets: PetsPage!
   createdAt: AWSDateTime!
