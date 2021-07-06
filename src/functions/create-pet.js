@@ -10,7 +10,7 @@ module.exports.handler = async event => {
 
   const newPet = {
     id: ulid.ulid(),
-    ownerId: event.identity.username,
+    owner: event.identity.username,
     name,
     bio,
     birthDate,

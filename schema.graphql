@@ -59,7 +59,7 @@ type PetOwnerProfile implements IProfile {
 
 type Pet {
   id: ID!
-  ownerId: ID!
+  owner: PetOwnerProfile!
   name: String!
   birthDate: AWSDate!
   bio: String

@@ -14,15 +14,24 @@ mappingTemplates:
     dataSource: createPetFunction
     request: false
     response: false
+
+  # NESTED FIELDS
+  - type: Pet
+    field: owner
+    dataSource: usersTable
+
 dataSources:
   - type: AMAZON_DYNAMODB
     name: petsTable
     config:
       tableName: !Ref PetsTable
+  - type: AMAZON_DYNAMODB
+    name: usersTable
+    config:
+      tableName: !Ref UsersTable
   - type: AWS_LAMBDA
     name: createPetFunction
     config:
       functionName: createPet
-
 substitutions:
   PetsTable: !Ref PetsTable
