@@ -8,12 +8,12 @@ PetsTable:
     AttributeDefinitions:
       - AttributeName: id
         AttributeType: S
-      - AttributeName: ownerId
+      - AttributeName: owner
         AttributeType: S
     GlobalSecondaryIndexes:
       - IndexName: byOwner
         KeySchema:
-          - AttributeName: ownerId
+          - AttributeName: owner
             KeyType: HASH
           - AttributeName: id
             KeyType: RANGE
