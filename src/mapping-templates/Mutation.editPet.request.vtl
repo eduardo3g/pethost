@@ -1,0 +1,21 @@
+{
+  "version" : "2018-05-29",
+  "operation" : "UpdateItem",
+  "key": {
+    "id" : $util.dynamodb.toDynamoDBJson($context.arguments.petInput.id)
+  },
+  "update" : {
+    "expression" : "set #name = :name, birthDate = :birthDate, bio = :bio",
+    "expressionNames" : {
+      "#name" : "name"
+    },
+    "expressionValues" : {
+      ":name" : $util.dynamodb.toDynamoDBJson($context.arguments.petInput.name),
+      ":birthDate" : $util.dynamodb.toDynamoDBJson($context.arguments.petInput.birthDate),
+      ":bio" : $util.dynamodb.toDynamoDBJson($context.arguments.petInput.bio)
+    }
+  },
+  "condition" : {
+    "expression" : "attribute_exists(id)"
+  }
+}

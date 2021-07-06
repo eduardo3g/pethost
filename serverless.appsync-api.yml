@@ -17,6 +17,9 @@ mappingTemplates:
     dataSource: createPetFunction
     request: false
     response: false
+  - type: Mutation
+    field: editPet
+    dataSource: petsTable
 
   # NESTED FIELDS
   - type: Pet

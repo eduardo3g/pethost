@@ -13,6 +13,8 @@ type Query {
 
 type Mutation {
   createPet(petInput: PetInput!): Pet! @aws_auth(cognito_groups: ["owner"])
+
+  editPet(petInput: EditPetInput!): Pet! @aws_auth(cognito_groups: ["owner"])
 }
 
 input PetInput {
@@ -20,6 +22,13 @@ input PetInput {
   birthDate: AWSDate!
   bio: String
   type: PetType!
+}
+
+input EditPetInput {
+  id: ID!
+  name: String!
+  birthDate: AWSDate
+  bio: String
 }
 
 input BookingInput {
@@ -36,8 +45,8 @@ interface IProfile {
   birthDate: AWSDate!
   bio: String
   address: String!
-  addressNumber: Int!
-  zipCode: String!
+  # addressNumber: Int!
+  # zipCode: String!
   cellphone: String!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime
@@ -51,8 +60,8 @@ type PetOwnerProfile implements IProfile {
   birthDate: AWSDate!
   bio: String
   address: String!
-  addressNumber: Int!
-  zipCode: String!
+  # addressNumber: Int!
+  # zipCode: String!
   cellphone: String!
   pets: PetsPage!
   createdAt: AWSDateTime!

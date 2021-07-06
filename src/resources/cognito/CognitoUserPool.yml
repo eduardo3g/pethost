@@ -19,6 +19,18 @@ CognitoUserPool:
         Required: false
         Mutable: true
       - AttributeDataType: String
+        Name: address
+        Required: false
+        Mutable: true
+      - AttributeDataType: String
+        Name: birthdate
+        Required: false
+        Mutable: true
+      - AttributeDataType: String
+        Name: phone_number
+        Required: false
+        Mutable: true
+      - AttributeDataType: String
         Name: role
         Required: false
         Mutable: true
