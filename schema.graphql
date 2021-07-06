@@ -6,6 +6,9 @@ schema {
 type Query {
   getImageUploadUrl(extension: String, contentType: String): AWSURL!
     @aws_auth(cognito_groups: ["owner", "host"])
+
+  getMyPets(limit: Int!, nextToken: String): PetsPage!
+    @aws_auth(cognito_groups: ["owner"])
 }
 
 type Mutation {

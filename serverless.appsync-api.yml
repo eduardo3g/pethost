@@ -9,6 +9,9 @@ additionalAuthenticationProviders:
   - authenticationType: AWS_IAM
 mappingTemplatesLocation: src/mapping-templates
 mappingTemplates:
+  - type: Query
+    field: getMyPets
+    dataSource: petsTable
   - type: Mutation
     field: createPet
     dataSource: createPetFunction
