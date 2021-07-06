@@ -5,6 +5,8 @@ const we_invoke_confirmUserSignUp = async (
   cognitoUsername,
   name,
   email,
+  address,
+  phone_number,
   role,
 ) => {
   const context = {};
@@ -23,6 +25,8 @@ const we_invoke_confirmUserSignUp = async (
         email_verified: 'false',
         name,
         email,
+        address,
+        phone_number,
         'custom:role': role,
       },
     },

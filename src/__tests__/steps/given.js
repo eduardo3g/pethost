@@ -17,6 +17,8 @@ const a_random_user = async role => {
   const name = `${firstName} ${lastName} ${suffix}`;
   const password = chance.string({ length: 8 });
   const email = `${firstName}-${lastName}-${suffix}@pethost.com`;
+  const address = chance.address();
+  const phone_number = '+15555555555';
 
   const signUpResponse = await cognito
     .signUp({
@@ -26,6 +28,8 @@ const a_random_user = async role => {
       UserAttributes: [
         { Name: 'name', Value: name },
         { Name: 'email', Value: email },
+        { Name: 'address', Value: address },
+        { Name: 'phone_number', Value: phone_number },
         { Name: 'custom:role', Value: role },
       ],
     })
@@ -35,6 +39,8 @@ const a_random_user = async role => {
     name,
     password,
     email,
+    address,
+    phone_number,
     role,
     cognitoUsername: signUpResponse.UserSub,
   };
@@ -62,9 +68,8 @@ const an_appsync_context = (identity, args, result, source, info, prev) => {
 
 const an_authenticated_user = async userRole => {
   try {
-    const { name, email, password, cognitoUsername } = await a_random_user(
-      userRole,
-    );
+    const { name, email, password, address, phone_number, cognitoUsername } =
+      await a_random_user(userRole);
 
     const cognito = new AWS.CognitoIdentityServiceProvider();
 
@@ -93,6 +98,8 @@ const an_authenticated_user = async userRole => {
       username: cognitoUsername,
       name,
       email,
+      address,
+      phone_number,
       idToken: auth.AuthenticationResult.IdToken,
       accessToken: auth.AuthenticationResult.AccessToken,
     };
