@@ -6,14 +6,14 @@ const ulid = require('ulid');
 const { PETS_TABLE } = process.env;
 
 module.exports.handler = async event => {
-  const { name, bio, birthDate, type } = event.arguments.petInput;
+  const { name, bio, birthdate, type } = event.arguments.petInput;
 
   const newPet = {
     id: ulid.ulid(),
     owner: event.identity.username,
     name,
     bio,
-    birthDate,
+    birthdate,
     type,
     createdAt: new Date().toJSON(),
     updatedAt: null,
