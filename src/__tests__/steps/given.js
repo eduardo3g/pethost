@@ -19,6 +19,8 @@ const a_random_user = async role => {
   const email = `${firstName}-${lastName}-${suffix}@pethost.com`;
   const address = chance.address();
   const phone_number = '+15555555555';
+  const latitude = '-23.6298482';
+  const longitude = '-46.6222815';
 
   const signUpResponse = await cognito
     .signUp({
@@ -31,6 +33,8 @@ const a_random_user = async role => {
         { Name: 'address', Value: address },
         { Name: 'phone_number', Value: phone_number },
         { Name: 'custom:role', Value: role },
+        { Name: 'custom:lat', Value: latitude },
+        { Name: 'custom:lon', Value: longitude },
       ],
     })
     .promise();
@@ -40,6 +44,8 @@ const a_random_user = async role => {
     password,
     email,
     address,
+    latitude,
+    longitude,
     phone_number,
     role,
     cognitoUsername: signUpResponse.UserSub,
@@ -68,8 +74,16 @@ const an_appsync_context = (identity, args, result, source, info, prev) => {
 
 const an_authenticated_user = async userRole => {
   try {
-    const { name, email, password, address, phone_number, cognitoUsername } =
-      await a_random_user(userRole);
+    const {
+      name,
+      email,
+      password,
+      address,
+      latitude,
+      longitude,
+      phone_number,
+      cognitoUsername,
+    } = await a_random_user(userRole);
 
     const cognito = new AWS.CognitoIdentityServiceProvider();
 
@@ -99,6 +113,8 @@ const an_authenticated_user = async userRole => {
       name,
       email,
       address,
+      latitude,
+      longitude,
       phone_number,
       idToken: auth.AuthenticationResult.IdToken,
       accessToken: auth.AuthenticationResult.AccessToken,

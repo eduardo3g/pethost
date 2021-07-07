@@ -6,6 +6,8 @@ const we_invoke_confirmUserSignUp = async (
   name,
   email,
   address,
+  latitude,
+  longitude,
   phone_number,
   role,
 ) => {
@@ -28,6 +30,8 @@ const we_invoke_confirmUserSignUp = async (
         address,
         phone_number,
         'custom:role': role,
+        'custom:lat': latitude,
+        'custom:lon': longitude,
       },
     },
     response: {},
