@@ -4,6 +4,9 @@
   "description": "Are you going to travel and don't have anyone to take care of your pet? Don't worry, Pet Host will get your back.",
   "main": "index.js",
   "dependencies": {
+    "@middy/core": "^2.4.3",
+    "@middy/ssm": "^2.4.3",
+    "algoliasearch": "^4.10.3",
     "chance": "^1.1.7",
     "lodash": "^4.17.21",
     "ulid": "^2.3.0"
