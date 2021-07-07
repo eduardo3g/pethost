@@ -28,6 +28,7 @@ custom:
 functions:
   confirmUserSignup: ${file(src/resources/lambda/ConfirmUserSignupLambda.yml):ConfirmUserSignup}
   createPet: ${file(src/resources/lambda/CreatePetLambda.yml):CreatePet}
+  syncUsersToAlgolia: ${file(src/resources/lambda/SyncUsersToAlgoliaLambda.yml):SyncUsersToAlgolia}
 
 resources:
   Resources:

@@ -1,0 +1,12 @@
+SyncUsersToAlgolia:
+  handler: src/functions/sync-users-to-algolia.handler
+  events:
+    - stream:
+        type: dynamodb
+        arn: !GetAtt UsersTable.StreamArn
+  iamRoleStatements:
+    - Effect: Allow
+      Action: ssm:GetParameters
+      Resource:
+        - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${self:custom.stage}/algolia-app-id
+        - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${self:custom.stage}/algolia-admin-key
