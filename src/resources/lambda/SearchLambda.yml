@@ -1,0 +1,8 @@
+Search:
+  handler: src/functions/search.handler
+  iamRoleStatements:
+    - Effect: Allow
+      Action: ssm:GetParameters
+      Resource:
+        - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${self:custom.stage}/algolia-app-id
+        - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${self:custom.stage}/algolia-admin-key

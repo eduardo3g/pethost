@@ -12,6 +12,11 @@ mappingTemplates:
   - type: Query
     field: getMyPets
     dataSource: petsTable
+  - type: Query
+    field: search
+    dataSource: searchFunction
+    request: false
+    response: false
   - type: Mutation
     field: createPet
     dataSource: createPetFunction
@@ -39,5 +44,9 @@ dataSources:
     name: createPetFunction
     config:
       functionName: createPet
+  - type: AWS_LAMBDA
+    name: searchFunction
+    config:
+      functionName: search
 substitutions:
   PetsTable: !Ref PetsTable

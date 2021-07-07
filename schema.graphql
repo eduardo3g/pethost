@@ -9,6 +9,13 @@ type Query {
 
   getMyPets(limit: Int!, nextToken: String): PetsPage!
     @aws_auth(cognito_groups: ["owner"])
+
+  search(
+    query: String!
+    mode: SearchMode!
+    limit: Int!
+    nextToken: String
+  ): SearchResultsPage!
 }
 
 type Mutation {
@@ -19,7 +26,7 @@ type Mutation {
 
 input PetInput {
   name: String!
-  birthDate: AWSDate!
+  birthdate: AWSDate!
   bio: String
   type: PetType!
 }
@@ -27,7 +34,7 @@ input PetInput {
 input EditPetInput {
   id: ID!
   name: String!
-  birthDate: AWSDate!
+  birthdate: AWSDate!
   bio: String!
 }
 
@@ -42,7 +49,7 @@ interface IProfile {
   id: ID!
   name: String!
   imageUrl: AWSURL
-  birthDate: AWSDate!
+  birthdate: AWSDate!
   bio: String
   address: String!
   cellphone: String!
@@ -55,7 +62,7 @@ type PetOwnerProfile implements IProfile {
   id: ID!
   name: String!
   imageUrl: AWSURL
-  birthDate: AWSDate!
+  birthdate: AWSDate!
   bio: String
   address: String!
   cellphone: String!
@@ -69,7 +76,7 @@ type Pet {
   id: ID!
   owner: PetOwnerProfile!
   name: String!
-  birthDate: AWSDate!
+  birthdate: AWSDate!
   bio: String
   type: PetType!
   createdAt: AWSDateTime!
@@ -82,11 +89,22 @@ type PetsPage {
   nextToken: String
 }
 
+union SearchResult = PetOwnerProfile | Pet
+
+type SearchResultsPage {
+  results: [SearchResult!]
+  nextToken: String
+}
+
 enum PetType {
   Cat
   Dog
   Bird
   Rodent
+}
+
+enum SearchMode {
+  People
 }
 
 enum ResidenceType {
