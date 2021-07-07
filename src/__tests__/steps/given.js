@@ -21,6 +21,7 @@ const a_random_user = async role => {
   const phone_number = '+15555555555';
   const latitude = '-23.6298482';
   const longitude = '-46.6222815';
+  const birthdate = '1999-03-27';
 
   const signUpResponse = await cognito
     .signUp({
@@ -41,7 +42,9 @@ const a_random_user = async role => {
 
   return {
     name,
+    birthdate,
     password,
+    bio: null,
     email,
     address,
     latitude,
