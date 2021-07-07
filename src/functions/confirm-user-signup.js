@@ -13,6 +13,8 @@ module.exports.handler = async event => {
     address,
     phone_number,
     'custom:role': role,
+    'custom:lat': lat,
+    'custom:lon': lon,
   } = event.request.userAttributes;
 
   if (event.triggerSource === 'PostConfirmation_ConfirmSignUp') {
@@ -23,6 +25,8 @@ module.exports.handler = async event => {
       name,
       email,
       address,
+      latitude: lat,
+      longitude: lon,
       phone_number,
       role,
       createdAt: timestamp,
