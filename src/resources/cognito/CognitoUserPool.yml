@@ -23,6 +23,14 @@ CognitoUserPool:
         Required: false
         Mutable: true
       - AttributeDataType: String
+        Name: lat
+        Required: false
+        Mutable: true
+      - AttributeDataType: String
+        Name: lon
+        Required: false
+        Mutable: true
+      - AttributeDataType: String
         Name: birthdate
         Required: false
         Mutable: true
