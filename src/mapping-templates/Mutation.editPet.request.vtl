@@ -4,18 +4,21 @@
   "key": {
     "id" : $util.dynamodb.toDynamoDBJson($context.arguments.petInput.id)
   },
+    "condition" : {
+    "expression" : "attribute_exists(id) AND #owner = :currentUserId"
+  },
   "update" : {
-    "expression" : "set #name = :name, birthDate = :birthDate, bio = :bio",
+    "expression" : "set #name = :name, birthDate = :birthDate, bio = :bio, updatedAt = :currentDateTime",
     "expressionNames" : {
-      "#name" : "name"
+      "#name" : "name",
+      "#owner" : "owner"
     },
     "expressionValues" : {
       ":name" : $util.dynamodb.toDynamoDBJson($context.arguments.petInput.name),
       ":birthDate" : $util.dynamodb.toDynamoDBJson($context.arguments.petInput.birthDate),
-      ":bio" : $util.dynamodb.toDynamoDBJson($context.arguments.petInput.bio)
+      ":bio" : $util.dynamodb.toDynamoDBJson($context.arguments.petInput.bio),
+      ":currentUserId": $util.dynamodb.toDynamoDBJson($context.identity.username),
+      ":currentDateTime": $util.dynamodb.toDynamoDBJson($util.time.nowISO8601())
     }
-  },
-  "condition" : {
-    "expression" : "attribute_exists(id)"
   }
 }
