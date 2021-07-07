@@ -27,8 +27,8 @@ input PetInput {
 input EditPetInput {
   id: ID!
   name: String!
-  birthDate: AWSDate
-  bio: String
+  birthDate: AWSDate!
+  bio: String!
 }
 
 input BookingInput {
