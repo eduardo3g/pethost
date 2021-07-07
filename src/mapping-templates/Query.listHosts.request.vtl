@@ -1,0 +1,22 @@
+#set ($isValidLimit = $context.arguments.limit <= 10)
+$util.validate($isValidLimit, "max limit is 10")
+
+{
+  "version" : "2018-05-29",
+  "operation" : "Query",
+  "query" : {
+    "expression" : "#role = :hostRole",
+    "expressionValues" : {
+      ":hostRole" : $util.dynamodb.toDynamoDBJson("host")
+    },
+    "expressionNames": {
+      "#role": "role"
+    }
+  },
+  "index" : "byUserType",
+  "nextToken" : $util.toJson($context.arguments.nextToken),
+  "limit" : $util.toJson($context.arguments.limit),
+  "scanIndexForward" : false,
+  "consistentRead" : false,
+  "select" : "ALL_ATTRIBUTES",
+}

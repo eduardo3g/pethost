@@ -16,6 +16,8 @@ type Query {
     limit: Int!
     nextToken: String
   ): SearchResultsPage!
+
+  listHosts(limit: Int!, nextToken: String): HostsPage!
 }
 
 type Mutation {
@@ -72,6 +74,19 @@ type PetOwnerProfile implements IProfile {
   deletedAt: AWSDateTime
 }
 
+type PetHostProfile implements IProfile {
+  id: ID!
+  name: String!
+  imageUrl: AWSURL
+  birthdate: AWSDate!
+  bio: String
+  address: String!
+  cellphone: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
+  deletedAt: AWSDateTime
+}
+
 type Pet {
   id: ID!
   owner: PetOwnerProfile!
@@ -86,6 +101,11 @@ type Pet {
 
 type PetsPage {
   pets: [Pet!]
+  nextToken: String
+}
+
+type HostsPage {
+  hosts: [PetHostProfile!]
   nextToken: String
 }
 

@@ -17,6 +17,9 @@ mappingTemplates:
     dataSource: searchFunction
     request: false
     response: false
+  - type: Query
+    field: listHosts
+    dataSource: usersTable
   - type: Mutation
     field: createPet
     dataSource: createPetFunction
