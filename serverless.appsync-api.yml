@@ -28,11 +28,25 @@ mappingTemplates:
   - type: Mutation
     field: editPet
     dataSource: petsTable
+  - type: Mutation
+    field: createBookingRequest
+    dataSource: createBookingRequestFunction
+    request: false
+    response: false
 
   # NESTED FIELDS
   - type: Pet
     field: owner
     dataSource: usersTable
+  - type: Booking
+    field: owner
+    dataSource: usersTable
+  - type: Booking
+    field: host
+    dataSource: usersTable
+  - type: Booking
+    field: pet
+    dataSource: petsTable
 
 dataSources:
   - type: AMAZON_DYNAMODB
@@ -51,5 +65,9 @@ dataSources:
     name: searchFunction
     config:
       functionName: search
+  - type: AWS_LAMBDA
+    name: createBookingRequestFunction
+    config:
+      functionName: createBookingRequest
 substitutions:
   PetsTable: !Ref PetsTable

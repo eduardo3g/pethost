@@ -1,0 +1,56 @@
+BookingsTable:
+  Type: AWS::DynamoDB::Table
+  Properties:
+    BillingMode: PAY_PER_REQUEST
+    KeySchema:
+      - AttributeName: id
+        KeyType: HASH
+    AttributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+      - AttributeName: status
+        AttributeType: S
+      - AttributeName: owner
+        AttributeType: S
+      - AttributeName: host
+        AttributeType: S
+      - AttributeName: pet
+        AttributeType: S
+    GlobalSecondaryIndexes:
+      - IndexName: byStatus
+        KeySchema:
+          - AttributeName: status
+            KeyType: HASH
+          - AttributeName: id
+            KeyType: RANGE
+        Projection:
+          ProjectionType: ALL
+      - IndexName: byOwner
+        KeySchema:
+          - AttributeName: owner
+            KeyType: HASH
+          - AttributeName: id
+            KeyType: RANGE
+        Projection:
+          ProjectionType: ALL
+      - IndexName: byHost
+        KeySchema:
+          - AttributeName: host
+            KeyType: HASH
+          - AttributeName: id
+            KeyType: RANGE
+        Projection:
+          ProjectionType: ALL
+      - IndexName: byPet
+        KeySchema:
+          - AttributeName: pet
+            KeyType: HASH
+          - AttributeName: id
+            KeyType: RANGE
+        Projection:
+          ProjectionType: ALL
+    Tags:
+      - Key: Environment
+        Value: ${self:custom.stage}
+      - Key: Name
+        Value: bookings-table

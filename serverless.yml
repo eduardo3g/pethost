@@ -30,6 +30,7 @@ functions:
   createPet: ${file(src/resources/lambda/CreatePetLambda.yml):CreatePet}
   syncUsersToAlgolia: ${file(src/resources/lambda/SyncUsersToAlgoliaLambda.yml):SyncUsersToAlgolia}
   search: ${file(src/resources/lambda/SearchLambda.yml):Search}
+  createBookingRequest: ${file(src/resources/lambda/CreateBookingRequestLambda.yml):CreateBookingRequest}
 
 resources:
   Resources:
@@ -41,6 +42,7 @@ resources:
 
     UsersTable: ${file(src/resources/dynamodb/UsersTable.yml):UsersTable}
     PetsTable: ${file(src/resources/dynamodb/PetsTable.yml):PetsTable}
+    BookingsTable: ${file(src/resources/dynamodb/BookingsTable.yml):BookingsTable}
 
   Outputs:
     AwsRegion:
