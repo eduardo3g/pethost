@@ -16,6 +16,7 @@ module.exports.handler = async event => {
     'custom:role': role,
     'custom:lat': lat,
     'custom:lon': lon,
+    'custom:pricePerNight': pricePerNight,
   } = event.request.userAttributes;
 
   if (event.triggerSource === 'PostConfirmation_ConfirmSignUp') {
@@ -32,6 +33,7 @@ module.exports.handler = async event => {
       longitude: lon,
       phone_number,
       role,
+      pricePerNight,
       createdAt: timestamp,
       updatedAt: timestamp,
       deletedAt: null,
