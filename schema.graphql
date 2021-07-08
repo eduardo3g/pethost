@@ -18,6 +18,9 @@ type Query {
   ): SearchResultsPage!
 
   listHosts(limit: Int!, nextToken: String): HostsPage!
+
+  listMyBookings(limit: Int!, nextToken: String): BookingsPage!
+    @aws_auth(cognito_groups: ["owner"])
 }
 
 type Mutation {
@@ -109,6 +112,11 @@ type PetsPage {
 
 type HostsPage {
   hosts: [PetHostProfile!]
+  nextToken: String
+}
+
+type BookingsPage {
+  bookings: [Booking!]
   nextToken: String
 }
 

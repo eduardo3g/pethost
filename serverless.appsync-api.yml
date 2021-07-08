@@ -20,6 +20,9 @@ mappingTemplates:
   - type: Query
     field: listHosts
     dataSource: usersTable
+  - type: Query
+    field: listMyBookings
+    dataSource: bookingsTable
   - type: Mutation
     field: createPet
     dataSource: createPetFunction
@@ -57,6 +60,10 @@ dataSources:
     name: usersTable
     config:
       tableName: !Ref UsersTable
+  - type: AMAZON_DYNAMODB
+    name: bookingsTable
+    config:
+      tableName: !Ref BookingsTable
   - type: AWS_LAMBDA
     name: createPetFunction
     config:

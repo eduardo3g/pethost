@@ -1,0 +1,8 @@
+#if (!$util.isNull($context.error))
+  $util.error($context.error.message)
+#end
+
+{
+  "bookings": $util.toJson($context.result.items),
+  "nextToken": $util.toJson($util.defaultIfNullOrBlank($context.result.nextToken, null))
+}
