@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
@@ -18,6 +19,8 @@ module.exports.handler = middy(async (event, context) => {
   for (const record of event.Records) {
     if (record.eventName === 'INSERT' || record.eventName === 'MODIFY') {
       const profile = DynamoDB.Converter.unmarshall(record.dynamodb.NewImage);
+
+      if (profile.role !== 'host') continue;
 
       profile.objectID = profile.id;
       profile.__geoloc = {
