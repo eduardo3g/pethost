@@ -1,0 +1,11 @@
+AcceptBookingRequest:
+  handler: src/functions/accept-booking-request.handler
+  environment:
+    BOOKINGS_TABLE: !Ref BookingsTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:GetItem
+      Resource: !GetAtt BookingsTable.Arn
+    - Effect: Allow
+      Action: dynamodb:UpdateItem
+      Resource: !GetAtt BookingsTable.Arn

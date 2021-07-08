@@ -30,6 +30,9 @@ type Mutation {
 
   createBookingRequest(bookingRequestInput: BookingRequestInput!): Booking!
     @aws_auth(cognito_groups: ["owner"])
+
+  acceptBookingRequest(bookingId: ID!): Boolean!
+    @aws_auth(cognito_groups: ["host"])
 }
 
 input PetInput {
@@ -85,6 +88,7 @@ type PetHostProfile implements IProfile {
   name: String!
   imageUrl: AWSURL
   birthdate: AWSDate!
+  pricePerNight: Float!
   bio: String
   address: String!
   cellphone: String!

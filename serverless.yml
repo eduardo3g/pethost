@@ -31,6 +31,7 @@ functions:
   syncUsersToAlgolia: ${file(src/resources/lambda/SyncUsersToAlgoliaLambda.yml):SyncUsersToAlgolia}
   search: ${file(src/resources/lambda/SearchLambda.yml):Search}
   createBookingRequest: ${file(src/resources/lambda/CreateBookingRequestLambda.yml):CreateBookingRequest}
+  acceptBookingRequest: ${file(src/resources/lambda/AcceptBookingRequestLambda.yml):AcceptBookingRequest}
 
 resources:
   Resources:

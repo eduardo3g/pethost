@@ -36,6 +36,11 @@ mappingTemplates:
     dataSource: createBookingRequestFunction
     request: false
     response: false
+  - type: Mutation
+    field: acceptBookingRequest
+    dataSource: acceptBookingRequestFunction
+    request: false
+    response: false
 
   # NESTED FIELDS
   - type: Pet
@@ -76,5 +81,9 @@ dataSources:
     name: createBookingRequestFunction
     config:
       functionName: createBookingRequest
+  - type: AWS_LAMBDA
+    name: acceptBookingRequestFunction
+    config:
+      functionName: acceptBookingRequest
 substitutions:
   PetsTable: !Ref PetsTable
