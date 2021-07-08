@@ -23,6 +23,9 @@ mappingTemplates:
   - type: Query
     field: listMyBookings
     dataSource: bookingsTable
+  - type: Query
+    field: listBookingsFromHost
+    dataSource: bookingsTable
   - type: Mutation
     field: createPet
     dataSource: createPetFunction

@@ -21,6 +21,9 @@ type Query {
 
   listMyBookings(limit: Int!, nextToken: String): BookingsPage!
     @aws_auth(cognito_groups: ["owner"])
+
+  listBookingsFromHost(limit: Int!, nextToken: String): BookingsPage!
+    @aws_auth(cognito_groups: ["host"])
 }
 
 type Mutation {
