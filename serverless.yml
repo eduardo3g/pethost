@@ -32,6 +32,7 @@ functions:
   search: ${file(src/resources/lambda/SearchLambda.yml):Search}
   createBookingRequest: ${file(src/resources/lambda/CreateBookingRequestLambda.yml):CreateBookingRequest}
   acceptBookingRequest: ${file(src/resources/lambda/AcceptBookingRequestLambda.yml):AcceptBookingRequest}
+  rejectBookingRequest: ${file(src/resources/lambda/RejectBookingRequestLambda.yml):RejectBookingRequest}
 
 resources:
   Resources:

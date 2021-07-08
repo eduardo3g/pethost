@@ -33,6 +33,9 @@ type Mutation {
 
   acceptBookingRequest(bookingId: ID!): Boolean!
     @aws_auth(cognito_groups: ["host"])
+
+  rejectBookingRequest(bookingId: ID!): Boolean!
+    @aws_auth(cognito_groups: ["host"])
 }
 
 input PetInput {
