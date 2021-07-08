@@ -2,7 +2,14 @@ CreateBookingRequest:
   handler: src/functions/create-booking-request.handler
   environment:
     BOOKINGS_TABLE: !Ref BookingsTable
+    USERS_TABLE: !Ref UsersTable
+    PETS_TABLE: !Ref PetsTable
   iamRoleStatements:
     - Effect: Allow
       Action: dynamodb:PutItem
       Resource: !GetAtt BookingsTable.Arn
+    - Effect: Allow
+      Action: dynamodb:GetItem
+      Resource:
+        - !GetAtt UsersTable.Arn
+        - !GetAtt PetsTable.Arn

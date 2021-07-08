@@ -5,7 +5,7 @@ const ulid = require('ulid');
 const moment = require('moment');
 const { BookingStatus } = require('../lib/constants');
 
-const { BOOKINGS_TABLE } = process.env;
+const { BOOKINGS_TABLE, USERS_TABLE, PETS_TABLE } = process.env;
 
 module.exports.handler = async event => {
   const {
@@ -43,8 +43,40 @@ module.exports.handler = async event => {
     moment.duration(toDate.diff(fromDate)).asDays(),
   );
 
+  const getPetResponse = await DocumentClient.get({
+    TableName: PETS_TABLE,
+    Key: {
+      id: petId,
+    },
+  }).promise();
+
+  const petProfile = getPetResponse.Item;
+
+  if (!petProfile) {
+    throw new Error(`The provided pet ID ${petId} does not exist`);
+  }
+
+  if (petProfile.owner !== event.identity.username) {
+    throw new Error(
+      `You are not allowed to request a reservation for a pet that you don't own`,
+    );
+  }
+
+  const getHostResponse = await DocumentClient.get({
+    TableName: USERS_TABLE,
+    Key: {
+      id: hostId,
+    },
+  }).promise();
+
+  const hostProfile = getHostResponse.Item;
+
+  if (!hostProfile) {
+    throw new Error(`The provided host ID ${hostId} does not exist`);
+  }
+
   const totalNights = diffInDays <= 0 ? 1 : diffInDays;
-  const pricePerNight = 50; // TODO - Get from the host profile in DynamoDB
+  const pricePerNight = hostProfile.pricePerNight || 50; // TODO - Get from the host profile in DynamoDB
   const totalPrice = totalNights * pricePerNight;
 
   const newBookingRequest = {
