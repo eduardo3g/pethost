@@ -65,3 +65,6 @@ resources:
 
     LayersBucketName:
       Value: !Ref LayersBucket
+
+    ApiUrl:
+      Value: !GetAtt PethostGraphQlApi.GraphQLUrl
