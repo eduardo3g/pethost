@@ -1,0 +1,6 @@
+LayersBucketNameParameter:
+  Type: AWS::SSM::Parameter
+  Properties:
+    Type: String
+    Name: /${self:service}/${self:custom.stage}/layers-bucket
+    Value: !Ref LayersBucket
