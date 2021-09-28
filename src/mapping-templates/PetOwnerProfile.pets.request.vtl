@@ -1,0 +1,18 @@
+{
+  "version" : "2018-05-29",
+  "operation" : "Query",
+  "query" : {
+    "expression" : "#owner = :userId",
+    "expressionValues" : {
+      ":userId" : $util.dynamodb.toDynamoDBJson($context.identity.username)
+    },
+    "expressionNames": {
+      "#owner": "owner"
+    }
+  },
+  "index" : "byOwner",
+  "limit" : $util.toJson(10),
+  "scanIndexForward" : false,
+  "consistentRead" : false,
+  "select" : "ALL_ATTRIBUTES",
+}
