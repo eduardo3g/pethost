@@ -10,7 +10,13 @@ const BookingStatus = {
   COMPLETED: 'Completed',
 };
 
+const MediaUploadType = {
+  PROFILE_PICTURE: 'ProfilePicture',
+  HOUSE_PICTURE: 'HousePicture',
+};
+
 module.exports = {
   SearchModes,
   BookingStatus,
+  MediaUploadType,
 };
