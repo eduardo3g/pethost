@@ -1,0 +1,10 @@
+GetImageUploadUrl:
+  handler: src/functions/get-upload-url.handler
+  environment:
+    BUCKET_NAME: !Ref AssetsBucket
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:PutObjectAcl
+      Resource: !Sub ${AssetsBucket.Arn}/*

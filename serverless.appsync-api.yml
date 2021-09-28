@@ -29,6 +29,11 @@ mappingTemplates:
   - type: Query
     field: getMyProfile
     dataSource: usersTable
+  - type: Query
+    field: getImageUploadUrl
+    dataSource: getImageUploadUrlFunction
+    request: false
+    response: false
   - type: Mutation
     field: createPet
     dataSource: createPetFunction
@@ -66,6 +71,9 @@ mappingTemplates:
   - type: Booking
     field: pet
     dataSource: petsTable
+  - type: PetOwnerProfile
+    field: pets
+    dataSource: petsTable
 
 dataSources:
   - type: AMAZON_DYNAMODB
@@ -100,5 +108,10 @@ dataSources:
     name: rejectBookingRequestFunction
     config:
       functionName: rejectBookingRequest
+  - type: AWS_LAMBDA
+    name: getImageUploadUrlFunction
+    config:
+      functionName: getImageUploadUrl
+
 substitutions:
   PetsTable: !Ref PetsTable

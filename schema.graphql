@@ -4,8 +4,11 @@ schema {
 }
 
 type Query {
-  getImageUploadUrl(extension: String, contentType: String): AWSURL!
-    @aws_auth(cognito_groups: ["owner", "host"])
+  getImageUploadUrl(
+    extension: String
+    contentType: String
+    mediaType: MediaUploadType!
+  ): AWSURL! @aws_auth(cognito_groups: ["owner", "host"])
 
   getMyPets(limit: Int!, nextToken: String): PetsPage!
     @aws_auth(cognito_groups: ["owner"])
@@ -71,7 +74,7 @@ interface IProfile {
   birthdate: AWSDate!
   bio: String
   address: String!
-  cellphone: String!
+  phone_number: String!
   email: String!
   role: String!
   createdAt: AWSDateTime!
@@ -86,7 +89,7 @@ type PetOwnerProfile implements IProfile {
   birthdate: AWSDate!
   bio: String
   address: String!
-  cellphone: String!
+  phone_number: String!
   email: String!
   role: String!
   pets: PetsPage!
@@ -103,7 +106,7 @@ type PetHostProfile implements IProfile {
   pricePerNight: Float!
   bio: String
   address: String!
-  cellphone: String!
+  phone_number: String!
   email: String!
   role: String!
   createdAt: AWSDateTime!
@@ -185,4 +188,9 @@ enum BookingStatus {
   Accepted
   Canceled
   Completed
+}
+
+enum MediaUploadType {
+  ProfilePicture
+  HousePicture
 }
