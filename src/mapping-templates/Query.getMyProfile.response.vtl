@@ -1,0 +1,9 @@
+#if (!$util.isNull($context.result))
+  #if ($context.result.role == 'owner')
+    #set ($context.result["__typename"] = "PetOwnerProfile")
+  #else
+    #set ($context.result["__typename"] = "PetHostProfile")
+  #end
+#end
+
+$util.toJson($context.result)

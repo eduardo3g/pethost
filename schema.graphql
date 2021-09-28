@@ -24,6 +24,8 @@ type Query {
 
   listBookingsFromHost(limit: Int!, nextToken: String): BookingsPage!
     @aws_auth(cognito_groups: ["host"])
+
+  getMyProfile: MyProfile!
 }
 
 type Mutation {
@@ -70,6 +72,8 @@ interface IProfile {
   bio: String
   address: String!
   cellphone: String!
+  email: String!
+  role: String!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime
   deletedAt: AWSDateTime
@@ -83,6 +87,8 @@ type PetOwnerProfile implements IProfile {
   bio: String
   address: String!
   cellphone: String!
+  email: String!
+  role: String!
   pets: PetsPage!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime
@@ -98,6 +104,8 @@ type PetHostProfile implements IProfile {
   bio: String
   address: String!
   cellphone: String!
+  email: String!
+  role: String!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime
   deletedAt: AWSDateTime
@@ -152,6 +160,8 @@ type Booking {
   updatedAt: AWSDateTime
   deletedAt: AWSDateTime
 }
+
+union MyProfile = PetOwnerProfile | PetHostProfile
 
 enum PetType {
   Cat
