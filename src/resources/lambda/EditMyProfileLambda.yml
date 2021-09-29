@@ -1,0 +1,11 @@
+EditMyProfile:
+  handler: src/functions/edit-my-profile.handler
+  environment:
+    USERS_TABLE: !Ref UsersTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:GetItem
+      Resource: !GetAtt UsersTable.Arn
+    - Effect: Allow
+      Action: dynamodb:UpdateItem
+      Resource: !GetAtt UsersTable.Arn

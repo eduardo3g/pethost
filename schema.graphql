@@ -32,6 +32,9 @@ type Query {
 }
 
 type Mutation {
+  editMyProfile(newProfile: ProfileInput!): Boolean!
+    @aws_auth(cognito_groups: ["owner", "host"])
+
   createPet(petInput: PetInput!): Pet! @aws_auth(cognito_groups: ["owner"])
 
   editPet(petInput: EditPetInput!): Pet! @aws_auth(cognito_groups: ["owner"])
@@ -44,6 +47,15 @@ type Mutation {
 
   rejectBookingRequest(bookingId: ID!): Boolean!
     @aws_auth(cognito_groups: ["host"])
+}
+
+input ProfileInput {
+  name: String!
+  imageUrl: AWSURL
+  bio: String
+  address: String
+  birthdate: AWSDate
+  houseImageUrls: [String]
 }
 
 input PetInput {
