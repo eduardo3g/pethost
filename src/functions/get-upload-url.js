@@ -11,7 +11,7 @@ module.exports.handler = async event => {
   const id = ulid.ulid();
   let key = `${event.identity.username}/${id}`;
 
-  const { extension, mode: uploadMode } = event.arguments;
+  const { extension, mediaType: uploadMode } = event.arguments;
 
   if (uploadMode === MediaUploadType.HOUSE_PICTURE) {
     key += '-HOUSE_PICTURE';
