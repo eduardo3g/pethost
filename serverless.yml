@@ -37,6 +37,7 @@ functions:
   acceptBookingRequest: ${file(src/resources/lambda/AcceptBookingRequestLambda.yml):AcceptBookingRequest}
   rejectBookingRequest: ${file(src/resources/lambda/RejectBookingRequestLambda.yml):RejectBookingRequest}
   getImageUploadUrl: ${file(src/resources/lambda/GetImageUploadUrlLambda.yml):GetImageUploadUrl}
+  editMyProfile: ${file(src/resources/lambda/EditMyProfileLambda.yml):EditMyProfile}
 
 resources:
   Resources:

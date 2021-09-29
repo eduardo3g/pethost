@@ -57,6 +57,11 @@ mappingTemplates:
     dataSource: rejectBookingRequestFunction
     request: false
     response: false
+  - type: Mutation
+    field: editMyProfile
+    dataSource: editMyProfileFunction
+    request: false
+    response: false
 
   # NESTED FIELDS
   - type: Pet
@@ -112,6 +117,10 @@ dataSources:
     name: getImageUploadUrlFunction
     config:
       functionName: getImageUploadUrl
+  - type: AWS_LAMBDA
+    name: editMyProfileFunction
+    config:
+      functionName: editMyProfile
 
 substitutions:
   PetsTable: !Ref PetsTable
