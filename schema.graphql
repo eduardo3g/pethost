@@ -114,6 +114,7 @@ type PetHostProfile implements IProfile {
   id: ID!
   name: String!
   imageUrl: AWSURL
+  houseImageUrls: [String]
   birthdate: AWSDate!
   pricePerNight: Float!
   bio: String
