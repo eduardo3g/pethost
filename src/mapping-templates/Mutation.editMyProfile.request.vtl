@@ -5,7 +5,7 @@
       "id" : $util.dynamodb.toDynamoDBJson($context.identity.username)
   },
   "update" : {
-    "expression" : "set #name = :name, imageUrl = :imageUrl, backgroundImageUrl = :backgroundImageUrl, bio = :bio, #location = :location, website = :website, birthdate = :birthdate",
+    "expression" : "set #name = :name, imageUrl = :imageUrl, backgroundImageUrl = :backgroundImageUrl, bio = :bio, #location = :location, website = :website, birthdate = :birthdate, houseName = :houseName",
     "expressionNames" : {
         "#name" : "name",
         "#location" : "location"
@@ -17,7 +17,8 @@
         ":bio" : $util.dynamodb.toDynamoDBJson($context.arguments.newProfile.bio),
         ":location" : $util.dynamodb.toDynamoDBJson($context.arguments.newProfile.location),
         ":website" : $util.dynamodb.toDynamoDBJson($context.arguments.newProfile.website),
-        ":birthdate" : $util.dynamodb.toDynamoDBJson($context.arguments.newProfile.birthdate)
+        ":birthdate" : $util.dynamodb.toDynamoDBJson($context.arguments.newProfile.birthdate),
+        ":houseName" : $util.dynamodb.toDynamoDBJson($context.arguments.newProfile.houseName)
     }
   },
   "condition" : {

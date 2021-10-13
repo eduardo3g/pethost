@@ -56,6 +56,7 @@ input ProfileInput {
   address: String
   birthdate: AWSDate
   houseImageUrls: [String]
+  houseName: String
 }
 
 input PetInput {
@@ -117,6 +118,7 @@ type PetHostProfile implements IProfile {
   houseImageUrls: [String]
   birthdate: AWSDate!
   pricePerNight: Float!
+  houseName: String!
   bio: String
   address: String!
   phone_number: String!
