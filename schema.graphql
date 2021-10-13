@@ -71,6 +71,7 @@ input EditPetInput {
   name: String!
   birthdate: AWSDate!
   bio: String!
+  imageUrl: String
 }
 
 input BookingRequestInput {
@@ -135,6 +136,7 @@ type Pet {
   name: String!
   birthdate: AWSDate!
   bio: String
+  imageUrl: AWSURL
   type: PetType!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime
@@ -208,4 +210,5 @@ enum BookingStatus {
 enum MediaUploadType {
   ProfilePicture
   HousePicture
+  PetPicture
 }
