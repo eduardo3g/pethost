@@ -17,6 +17,8 @@ module.exports.handler = async event => {
     key += '-HOUSE_PICTURE';
   } else if (uploadMode === MediaUploadType.PROFILE_PICTURE) {
     key += '-PROFILE_PICTURE';
+  } else if (uploadMode === MediaUploadType.PET_PICTURE) {
+    key += '-PET_PICTURE';
   }
 
   if (extension) {
