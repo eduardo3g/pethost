@@ -8,8 +8,15 @@ const { USERS_TABLE } = process.env;
 module.exports.handler = async event => {
   try {
     const currentUserId = event.identity.username;
-    const { name, imageUrl, bio, address, birthdate, houseImageUrls } =
-      event.arguments.newProfile;
+    const {
+      name,
+      imageUrl,
+      bio,
+      address,
+      birthdate,
+      houseImageUrls,
+      houseName,
+    } = event.arguments.newProfile;
 
     const getUserResponse = await DocumentClient.get({
       TableName: USERS_TABLE,
@@ -40,7 +47,7 @@ module.exports.handler = async event => {
         id: currentUserId,
       },
       UpdateExpression:
-        'set #name = :name, imageUrl = :imageUrl, bio = :bio, address = :address, birthdate = :birthdate, houseImageUrls = :houseImageUrls',
+        'set #name = :name, imageUrl = :imageUrl, bio = :bio, address = :address, birthdate = :birthdate, houseImageUrls = :houseImageUrls, houseName = :houseName',
       ExpressionAttributeNames: {
         '#name': 'name',
       },
@@ -58,6 +65,8 @@ module.exports.handler = async event => {
               user.houseImageUrls.length > 0
             ? user.houseImageUrls
             : [],
+        ':houseName':
+          houseName || (user.houseName ? user.houseName : 'My comfy house'),
       },
       ConditionExpression: 'attribute_exists(id)',
     };

@@ -46,5 +46,9 @@ CognitoUserPool:
         Name: pricePerNight
         Required: false
         Mutable: true
+      - AttributeDataType: String
+        Name: houseName
+        Required: false
+        Mutable: true
     LambdaConfig:
       PostConfirmation: !GetAtt ConfirmUserSignupLambdaFunction.Arn
