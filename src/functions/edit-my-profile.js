@@ -41,6 +41,22 @@ module.exports.handler = async event => {
       );
     }
 
+    if (typeof user.houseImageUrls === 'undefined') {
+      user.houseImageUrls = [];
+    }
+
+    if (houseImageUrls && houseImageUrls.length > 0) {
+      houseImageUrls.forEach(url => {
+        user.houseImageUrls.push(url);
+      });
+    }
+
+    if (user.houseImageUrls.length > 10) {
+      throw new Error(
+        `You're only allowed to upload up to 2 house pictures, but you already has ${user.houseImageUrls.length}`,
+      );
+    }
+
     const params = {
       TableName: USERS_TABLE,
       Key: {
@@ -57,14 +73,7 @@ module.exports.handler = async event => {
         ':bio': bio || (user.bio ? user.bio : null),
         ':address': address || (user.address ? user.address : null),
         ':birthdate': birthdate || (user.birthdate ? user.birthdate : null),
-        ':houseImageUrls':
-          houseImageUrls && houseImageUrls.length > 0
-            ? houseImageUrls
-            : typeof user.houseImageUrls !== 'undefined' &&
-              Array.isArray(user.houseImageUrls) &&
-              user.houseImageUrls.length > 0
-            ? user.houseImageUrls
-            : [],
+        ':houseImageUrls': user.houseImageUrls,
         ':houseName':
           houseName || (user.houseName ? user.houseName : 'My comfy house'),
       },
