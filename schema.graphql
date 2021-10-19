@@ -158,7 +158,7 @@ type BookingsPage {
   nextToken: String
 }
 
-union SearchResult = PetOwnerProfile | Pet
+union SearchResult = PetHostProfile
 
 type SearchResultsPage {
   results: [SearchResult!]
