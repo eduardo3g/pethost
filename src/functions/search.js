@@ -51,7 +51,7 @@ async function searchPeople(context, userId, query, limit, nextToken) {
   const { hits, page, nbPages } = await index.search(query, searchParams);
 
   hits.forEach(x => {
-    x.__typename = 'PetOwnerProfile';
+    x.__typename = 'PetHostProfile';
   });
 
   let nextSearchParams;
