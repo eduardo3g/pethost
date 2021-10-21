@@ -13,6 +13,7 @@ module.exports.handler = async event => {
     petId,
     fromDate: from,
     toDate: to,
+    message,
   } = event.arguments.bookingRequestInput;
 
   const fromDate = moment(from);
@@ -89,6 +90,7 @@ module.exports.handler = async event => {
     totalNights,
     pricePerNight,
     totalPrice,
+    message: message || null,
     status: BookingStatus.PENDING,
     createdAt: new Date().toJSON(),
     updatedAt: null,

@@ -79,6 +79,7 @@ input BookingRequestInput {
   petId: ID!
   fromDate: AWSDateTime!
   toDate: AWSDateTime!
+  message: String
 }
 
 interface IProfile {
@@ -175,6 +176,7 @@ type Booking {
   totalNights: Int!
   pricePerNight: Float!
   totalPrice: Float!
+  message: String
   status: BookingStatus!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime
