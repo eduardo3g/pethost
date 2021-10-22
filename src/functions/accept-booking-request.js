@@ -1,7 +1,7 @@
 const DynamoDB = require('aws-sdk/clients/dynamodb');
 
 const DocumentClient = new DynamoDB.DocumentClient();
-const moment = require('moment');
+// const moment = require('moment');
 const { BookingStatus } = require('../lib/constants');
 
 const { BOOKINGS_TABLE } = process.env;
@@ -22,15 +22,19 @@ module.exports.handler = async event => {
     throw new Error(`The booking ID ${bookingId} does not exist`);
   }
 
-  const isBeforeCurrentDate = moment(booking.fromDate).isBefore(moment());
+  // const isBeforeCurrentDate = moment(booking.fromDate)
+  //   .utc()
+  //   .isBefore(moment().utc());
 
-  if (isBeforeCurrentDate) {
-    throw new Error(
-      `The booking that occurs at ${moment(booking.fromDate).format(
-        'YYYY-MM-DDTHH:mm:ss',
-      )} is before the current date ${moment().format('YYYY-MM-DDTHH:mm:ss')}`,
-    );
-  }
+  // if (isBeforeCurrentDate) {
+  //   throw new Error(
+  //     `The booking that occurs at ${moment(booking.fromDate)
+  //       .utc()
+  //       .format('YYYY-MM-DDTHH:mm:ss')} is before the current date ${moment()
+  //       .utc()
+  //       .format('YYYY-MM-DDTHH:mm:ss')}`,
+  //   );
+  // }
 
   if (booking.host !== event.identity.username) {
     throw new Error(

@@ -18,27 +18,27 @@ module.exports.handler = async event => {
 
   const fromDate = moment(from);
   const toDate = moment(to);
-  const isBeforeCurrentDate = moment(fromDate).isBefore(moment());
+  // const isBeforeCurrentDate = moment(fromDate).isBefore(moment());
 
-  if (isBeforeCurrentDate) {
-    throw new Error(
-      `The booking requested for ${moment(fromDate).format(
-        'YYYY-MM-DDTHH:mm:ss',
-      )} is before the current date ${moment().format('YYYY-MM-DDTHH:mm:ss')}`,
-    );
-  }
+  // if (isBeforeCurrentDate) {
+  //   throw new Error(
+  //     `The booking requested for ${moment(fromDate).format(
+  //       'YYYY-MM-DDTHH:mm:ss',
+  //     )} is before the current date ${moment().format('YYYY-MM-DDTHH:mm:ss')}`,
+  //   );
+  // }
 
-  const isToDateBeforeFromDate = moment(toDate).isBefore(fromDate);
+  // const isToDateBeforeFromDate = moment(toDate).isBefore(fromDate);
 
-  if (isToDateBeforeFromDate) {
-    throw new Error(
-      `The 'to' date ${moment(toDate).format(
-        'YYYY-MM-DDTHH:mm:ss',
-      )} is before the 'from' date ${moment(fromDate).format(
-        'YYYY-MM-DDTHH:mm:ss',
-      )}`,
-    );
-  }
+  // if (isToDateBeforeFromDate) {
+  //   throw new Error(
+  //     `The 'to' date ${moment(toDate).format(
+  //       'YYYY-MM-DDTHH:mm:ss',
+  //     )} is before the 'from' date ${moment(fromDate).format(
+  //       'YYYY-MM-DDTHH:mm:ss',
+  //     )}`,
+  //   );
+  // }
 
   const diffInDays = Math.round(
     moment.duration(toDate.diff(fromDate)).asDays(),
@@ -77,7 +77,7 @@ module.exports.handler = async event => {
   }
 
   const totalNights = diffInDays <= 0 ? 1 : diffInDays;
-  const pricePerNight = hostProfile.pricePerNight || 50; // TODO - Get from the host profile in DynamoDB
+  const pricePerNight = hostProfile.pricePerNight || 50;
   const totalPrice = totalNights * pricePerNight;
 
   const newBookingRequest = {
