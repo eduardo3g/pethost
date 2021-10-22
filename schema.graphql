@@ -47,6 +47,8 @@ type Mutation {
 
   rejectBookingRequest(bookingId: ID!): Boolean!
     @aws_auth(cognito_groups: ["host"])
+
+  addHostToFavorites(hostId: ID!): Boolean! @aws_auth(cognito_groups: ["owner"])
 }
 
 input ProfileInput {

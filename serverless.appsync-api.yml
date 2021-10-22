@@ -62,6 +62,11 @@ mappingTemplates:
     dataSource: editMyProfileFunction
     request: false
     response: false
+  - type: Mutation
+    field: addHostToFavorites
+    dataSource: addHostToFavoritesFunction
+    request: false
+    response: false
 
   # NESTED FIELDS
   - type: Pet
@@ -121,6 +126,10 @@ dataSources:
     name: editMyProfileFunction
     config:
       functionName: editMyProfile
+  - type: AWS_LAMBDA
+    name: addHostToFavoritesFunction
+    config:
+      functionName: addHostToFavorites
 
 substitutions:
   PetsTable: !Ref PetsTable
