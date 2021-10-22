@@ -38,6 +38,7 @@ functions:
   rejectBookingRequest: ${file(src/resources/lambda/RejectBookingRequestLambda.yml):RejectBookingRequest}
   getImageUploadUrl: ${file(src/resources/lambda/GetImageUploadUrlLambda.yml):GetImageUploadUrl}
   editMyProfile: ${file(src/resources/lambda/EditMyProfileLambda.yml):EditMyProfile}
+  addHostToFavorites: ${file(src/resources/lambda/AddHostToFavoritesLambda.yml):AddHostToFavorites}
 
 resources:
   Resources:
@@ -50,6 +51,7 @@ resources:
     UsersTable: ${file(src/resources/dynamodb/UsersTable.yml):UsersTable}
     PetsTable: ${file(src/resources/dynamodb/PetsTable.yml):PetsTable}
     BookingsTable: ${file(src/resources/dynamodb/BookingsTable.yml):BookingsTable}
+    FavoritesTable: ${file(src/resources/dynamodb/FavoritesTable.yml):FavoritesTable}
 
     LayersBucket: ${file(src/resources/s3/LayersBucket.yml):LayersBucket}
     AssetsBucket: ${file(src/resources/s3/AssetsBucket.yml):AssetsBucket}

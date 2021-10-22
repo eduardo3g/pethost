@@ -1,0 +1,28 @@
+FavoritesTable:
+  Type: AWS::DynamoDB::Table
+  Properties:
+    BillingMode: PAY_PER_REQUEST
+    KeySchema:
+      - AttributeName: ownerId
+        KeyType: HASH
+      - AttributeName: hostId
+        KeyType: RANGE
+    AttributeDefinitions:
+      - AttributeName: ownerId
+        AttributeType: S
+      - AttributeName: hostId
+        AttributeType: S
+    GlobalSecondaryIndexes:
+      - IndexName: byOwnerId
+        KeySchema:
+          - AttributeName: ownerId
+            KeyType: HASH
+          - AttributeName: hostId
+            KeyType: RANGE
+        Projection:
+          ProjectionType: ALL
+    Tags:
+      - Key: Environment
+        Value: ${self:custom.stage}
+      - Key: Name
+        Value: favorites-table

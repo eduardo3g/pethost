@@ -1,0 +1,12 @@
+AddHostToFavorites:
+  handler: src/functions/add-host-to-favorites.handler
+  environment:
+    USERS_TABLE: !Ref UsersTable
+    FAVORITES_TABLE: !Ref FavoritesTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:GetItem
+      Resource: !GetAtt UsersTable.Arn
+    - Effect: Allow
+      Action: dynamodb:PutItem
+      Resource: !GetAtt FavoritesTable.Arn
