@@ -1,0 +1,21 @@
+#if ($context.source.hosts.size() == 0)
+  #return([])
+#end
+
+#set ($hosts = [])
+#foreach ($item in $context.source.hosts)
+  #set ($host = {})
+  #set ($host.id = $item.hostId)
+  $util.qr($hosts.add($util.dynamodb.toMapValues($host)))
+#end
+
+{
+  "version" : "2018-05-29",
+  "operation" : "BatchGetItem",
+  "tables" : {
+    "${UsersTable}": {
+      "keys": $util.toJson($hosts),
+      "consistentRead": false
+    }
+  }
+}

@@ -29,6 +29,11 @@ type Query {
     @aws_auth(cognito_groups: ["host"])
 
   getMyProfile: MyProfile!
+
+  listMyFavoriteHosts(
+    limit: Int!
+    nextToken: String
+  ): UnhydratedFavoriteHostsPage! @aws_auth(cognito_groups: ["owner"])
 }
 
 type Mutation {
@@ -158,6 +163,11 @@ type HostsPage {
 
 type BookingsPage {
   bookings: [Booking!]
+  nextToken: String
+}
+
+type UnhydratedFavoriteHostsPage {
+  hosts: [PetHostProfile!]
   nextToken: String
 }
 

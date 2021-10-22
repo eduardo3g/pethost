@@ -34,6 +34,9 @@ mappingTemplates:
     dataSource: getImageUploadUrlFunction
     request: false
     response: false
+  - type: Query
+    field: listMyFavoriteHosts
+    dataSource: favoritesTable
   - type: Mutation
     field: createPet
     dataSource: createPetFunction
@@ -84,6 +87,9 @@ mappingTemplates:
   - type: PetOwnerProfile
     field: pets
     dataSource: petsTable
+  - type: UnhydratedFavoriteHostsPage
+    field: hosts
+    dataSource: usersTable
 
 dataSources:
   - type: AMAZON_DYNAMODB
@@ -98,6 +104,10 @@ dataSources:
     name: bookingsTable
     config:
       tableName: !Ref BookingsTable
+  - type: AMAZON_DYNAMODB
+    name: favoritesTable
+    config:
+      tableName: !Ref FavoritesTable
   - type: AWS_LAMBDA
     name: createPetFunction
     config:
@@ -133,3 +143,4 @@ dataSources:
 
 substitutions:
   PetsTable: !Ref PetsTable
+  UsersTable: !Ref UsersTable
