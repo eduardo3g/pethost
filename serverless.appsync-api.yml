@@ -90,6 +90,9 @@ mappingTemplates:
   - type: UnhydratedFavoriteHostsPage
     field: hosts
     dataSource: usersTable
+  - type: PetHostProfile
+    field: isFavorite
+    dataSource: favoritesTable
 
 dataSources:
   - type: AMAZON_DYNAMODB

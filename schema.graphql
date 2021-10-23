@@ -133,6 +133,7 @@ type PetHostProfile implements IProfile {
   phone_number: String!
   email: String!
   role: String!
+  isFavorite: Boolean!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime
   deletedAt: AWSDateTime
