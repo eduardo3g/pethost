@@ -70,6 +70,11 @@ mappingTemplates:
     dataSource: addHostToFavoritesFunction
     request: false
     response: false
+  - type: Mutation
+    field: removeHostFromFavorites
+    dataSource: removeHostFromFavoritesFunction
+    request: false
+    response: false
 
   # NESTED FIELDS
   - type: Pet
@@ -143,6 +148,10 @@ dataSources:
     name: addHostToFavoritesFunction
     config:
       functionName: addHostToFavorites
+  - type: AWS_LAMBDA
+    name: removeHostFromFavoritesFunction
+    config:
+      functionName: removeHostFromFavorites
 
 substitutions:
   PetsTable: !Ref PetsTable
