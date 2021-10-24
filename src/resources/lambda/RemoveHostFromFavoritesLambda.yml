@@ -1,0 +1,12 @@
+RemoveHostFromFavorites:
+  handler: src/functions/remove-host-from-favorites.handler
+  environment:
+    USERS_TABLE: !Ref UsersTable
+    FAVORITES_TABLE: !Ref FavoritesTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:GetItem
+      Resource: !GetAtt UsersTable.Arn
+    - Effect: Allow
+      Action: dynamodb:DeleteItem
+      Resource: !GetAtt FavoritesTable.Arn

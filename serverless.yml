@@ -39,6 +39,7 @@ functions:
   getImageUploadUrl: ${file(src/resources/lambda/GetImageUploadUrlLambda.yml):GetImageUploadUrl}
   editMyProfile: ${file(src/resources/lambda/EditMyProfileLambda.yml):EditMyProfile}
   addHostToFavorites: ${file(src/resources/lambda/AddHostToFavoritesLambda.yml):AddHostToFavorites}
+  removeHostFromFavorites: ${file(src/resources/lambda/RemoveHostFromFavoritesLambda.yml):RemoveHostFromFavorites}
 
 resources:
   Resources:

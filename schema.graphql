@@ -54,6 +54,9 @@ type Mutation {
     @aws_auth(cognito_groups: ["host"])
 
   addHostToFavorites(hostId: ID!): Boolean! @aws_auth(cognito_groups: ["owner"])
+
+  removeHostFromFavorites(hostId: ID!): Boolean!
+    @aws_auth(cognito_groups: ["owner"])
 }
 
 input ProfileInput {
