@@ -5,7 +5,7 @@ plugins:
   - serverless-appsync-plugin
   - serverless-iam-roles-per-function
   - serverless-export-env
-  - serverless-layers
+  # - serverless-layers
 
 provider:
   name: aws
@@ -25,8 +25,8 @@ custom:
   stage: ${opt:stage, self:provider.stage}
   appSync:
     - ${file(serverless.appsync-api.yml)}
-  serverless-layers:
-    layersDeploymentBucket: ${ssm:/${self:service}/${self:custom.stage}/layers-bucket}
+  # serverless-layers:
+  # layersDeploymentBucket: ${ssm:/${self:service}/${self:custom.stage}/layers-bucket}
 
 functions:
   confirmUserSignup: ${file(src/resources/lambda/ConfirmUserSignupLambda.yml):ConfirmUserSignup}
